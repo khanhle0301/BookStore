@@ -1,0 +1,17 @@
+﻿@model BookStore.Model.Models.Page
+@{
+    ViewBag.Title = Model.Name;
+    ViewBag.Keywords = Model.MetaKeyword;
+    ViewBag.Descriptions = Model.MetaDescription;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div id="page" class="row">
+        <div class="col-md-12 details">
+            <h1 class="p25">@Model.Name</h1>
+            <p>@Html.Raw(Model.Content)</p>
+        </div>
+    </div>
+</div>
+

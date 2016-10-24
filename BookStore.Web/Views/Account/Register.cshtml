@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Đăng ký";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section footerJS{
+    <script src="/Assets/client/js/login.js"></script>
+}
+<div class="container ">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
+                <div class="panel-heading">
+                    <div class="col-xs-12">
+                        <a href="javascript:void(0);" id="register-form-link1">Đăng ký</a>
+                    </div>
+                    <hr>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form accept-charset="UTF-8" id="create_customer" method="post">
+                                <div class="errors" style="display:none;">
+                                    <ul>
+                                        <li id="existsResult"></li>
+                                    </ul>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="name" id="register-form-name" tabindex="1" class="form-control" placeholder="Họ tên" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email" id="register-form-email" tabindex="1" class="form-control" placeholder="Email" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="phone" id="register-form-phone" tabindex="1" class="form-control" placeholder="Điện thoại" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="address" id="register-form-address" tabindex="1" class="form-control" placeholder="Địa chỉ" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="userName" id="register-form-userName" tabindex="1" class="form-control" placeholder="Tài khoản" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" id="register-form-password" tabindex="2" class="form-control" placeholder="Mật khẩu">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="repassword" id="repassword-form-password" tabindex="2" class="form-control" placeholder="Nhập lại mật khẩu">
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Đăng ký">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="text-center">
+                                                <a href="/" tabindex="5" class="quaylai-cuahang hvr-icon-back">Quay lại cửa hàng</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

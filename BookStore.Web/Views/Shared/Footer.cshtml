@@ -1,0 +1,97 @@
+﻿@model BookStore.Web.Models.FooterHomeViewModel
+
+<footer id="footer">
+    <!-- Nhan tin qua email -->
+    <div class="register-email">
+        <div class="container">
+            <div class="col-md-8 col-md-push-2 padding">
+                <form accept-charset="UTF-8" class="contact-form" action="#" method="post">                   
+                    <div id="newsletter-signup">                        
+                        <div id="register-news">
+                            <input type="submit" class="register-submit-button hvr-grow" value="Đăng ký">
+                            <div id="email">
+                                <input type="email" id="newsletter-email" name="contact[email]" value="" placeholder="Đăng ký nhận bản tin khuyến mãi qua email">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div><!-- End .col-md-8 -->
+
+        </div><!-- End .container -->
+    </div><!-- End .register-email -->
+    <!-- footer info -->
+    <div id="footer-info">
+        <div class="container clearfix">
+            <div class="row">
+                <div class="col-md-2 col-sm-6 col-xs-6 info-public" id="thongtin-congty">
+                    <h4 class="info-title">Thông tin công ty</h4>
+                    <ul>
+                        <li><a href="javascript:void(0);">@Model.ContactDetail.CompanyName</a></li>
+                        <li><a href="javascript:void(0);">@Model.ContactDetail.CompanyAddress</a></li>
+                        <li><a href="javascript:void(0);">Phone: @Model.ContactDetail.CompanyPhone</a></li>
+                    </ul>
+                </div><!-- End .col-md-2 col-sm-6 col-xs-6 -->
+                <div class="col-md-3 col-sm-6 col-xs-6 info-public" id="hd-muahang">
+                    <h4 class="info-title">Danh mục</h4>
+                    <ul>
+                        <li><a href="/sach/news.html" title="Sản phẩm khuyến mãi">Sản phẩm mới</a></li>
+                        <li><a href="/sach/ban-chay.html" title="Sản phẩm nổi bật">Sản phẩm bán chạy</a></li>
+                        <li><a href="/sach/all.html" title="Tất cả sản phẩm">Tất cả sản phẩm</a></li>
+                    </ul>
+                </div><!-- End .col-md-3 -->
+                <div class="col-md-2 col-sm-6 col-xs-6 info-public" id="chinhsach">
+                    <h4 class="info-title">Chính sách chung</h4>
+                    <ul>
+                        @foreach (var item in Model.Page)
+                        {
+                            <li><a href="/pages/@(item.Alias).html">@item.Name</a></li>
+                        }
+                    </ul>
+                </div><!-- End .col-md-2 col-sm-6 col-xs-6 -->
+                <div class="col-md-2 col-sm-6 col-xs-6 info-public" id="the-tv">
+                    <h4 class="info-title">Bài viết mới</h4>
+                    <ul>
+                        @foreach (var item in Model.News)
+                        {
+                            <li><a href="/blogs/news/@item.Alias-@(item.ID).html">@item.Name</a></li>
+                        }
+                    </ul>
+                </div><!-- End .col-md-2 col-sm-6 col-xs-6 -->               
+            </div><!-- End .row -->
+            <div class="row clearfix">
+                <div class="col-md-9 ketnoi">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <a href="/" title="logo"><img src="//hstatic.net/939/1000035939/1000056344/logo.png?v=801" alt=""></a>
+                        </div><!-- End .col-md-2 -->
+                        <div class="col-md-8 col-sm-6" id="social-right">
+                            <h4>Kết nối với chúng tôi</h4>
+                            <ul class="social-ico">
+                                <li>
+                                    <a href="@ViewBag.Facebook" title="facebook">
+                                        <img class="hvr-pop" src="//hstatic.net/939/1000035939/1000056344/face.png?v=801" alt="">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@ViewBag.Twitter" title="Twitter">
+                                        <img class="hvr-pop" src="//hstatic.net/939/1000035939/1000056344/twitter.png?v=801" alt="">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@ViewBag.Vimeo" title="Vimeo">
+                                        <img class="hvr-pop" src="//hstatic.net/939/1000035939/1000056344/vimeo.png?v=801" alt="">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@ViewBag.Pinterest" title="Pinterest">
+                                        <img class="hvr-pop" src="//hstatic.net/939/1000035939/1000056344/pinterest.png?v=801" alt="">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div><!-- End .col-md-4 -->
+                    </div><!-- End .row -->
+                </div><!-- End .col-md-6 -->
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+    </div><!-- End .footer-info -->
+</footer>

@@ -1,0 +1,15 @@
+﻿@model BookStore.Model.Models.Page
+@{
+    ViewBag.Title = "Thông tin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div id="page" class="row">
+        <div class="col-md-12 details">
+            <h1 class="p25">@Model.Name</h1>
+            <p>@Html.Raw(Model.Content)</p>
+        </div>
+    </div>
+</div>
+

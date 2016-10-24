@@ -1,0 +1,57 @@
+﻿@model BookStore.Model.Models.Product
+@{
+    ViewBag.Title = "Trang xóa sản phẩm " + Model.Name;
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Xóa sản phẩm
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Thông tin sản phẩm
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    @if (ViewData["Error"] != null)
+                    {
+                        <h3 style="color:red">Xóa thất bại!</h3>
+                    }
+                    else
+                    {
+                        <h3>Bạn có chắc chắn muốn xóa bản ghi này?</h3>
+                    }
+                    <div>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.ID)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.ID)
+                            </dd>
+                            <dt>
+                               Tên sách
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Name)
+                            </dd>                          
+                        </dl>
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Xóa" class="btn btn-default" /> |
+                                @Html.ActionLink("Back to List", "Index")
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

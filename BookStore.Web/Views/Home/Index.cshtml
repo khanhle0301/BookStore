@@ -1,0 +1,223 @@
+﻿@model BookStore.Web.Models.HomeViewModel
+@{
+    ViewBag.Title = ViewBag.Title;
+    ViewBag.Keywords = ViewBag.Keywords;
+    ViewBag.Descriptions = ViewBag.Descriptions;
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section slide{
+    <div class="wrap-banner">
+        <div class="container clearfix">
+            <div class="col-lg-8">
+                <div class="row">
+                    <i class="icon-prevslide" id="cameraPrev" style="display: inline;"></i>
+                    <i class="icon-nextslide" id="cameraNext" style="display: inline;"></i>
+                    <div id="owl-banner-home" class="owl-carousel owl-theme">
+                        @foreach (var item in Model.Slide)
+                        {
+                            <div class="item">
+                                <a href="@item.Url" target="_blank">
+                                    <img style="cursor: pointer; display: block;" src="@item.Image" alt="@item.Name">
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <a href="@Model.SlideBanner.Url">
+                    <img src="@Model.SlideBanner.Image" alt="@Model.SlideBanner.Name">
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+
+            $("#owl-banner-home").owlCarousel({
+
+                navigation: false, // Show next and prev buttons
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                singleItem: true,
+                pagination: true
+            });
+            // Custom Navigation Events
+            $("#cameraNext").click(function () {
+                $("#owl-banner-home").trigger('owl.next');
+            })
+            $("#cameraPrev").click(function () {
+                $("#owl-banner-home").trigger('owl.prev');
+            })
+        });
+    </script>
+}
+<section id="content" class="container clearfix">
+    <div class="section-1 cleafix">
+        <div class="row">
+            <div id="section-1-product" class="col-md-9 clearfix">
+                <ul class="nav nav-tabs">
+                    <li class="active tab-selected">
+                        <a href="#sanpham_noibat" data-toggle="tab">
+                            Sản phẩm nổi bật
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#sanpham_moi" data-toggle="tab">
+                            Sách mới
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#sanpham_khuyenmai" data-toggle="tab">
+                            Sản phẩm khuyến mãi
+                        </a>
+                    </li>
+                </ul>
+                <h3></h3>
+                <!-- tab-content -->
+                <div class="tab-content clearfix">
+                    <div class="active tab-pane" id="sanpham_noibat">
+                        @foreach (var item in Model.ProductHot)
+                        {
+                            <div class="product col-md-5ths col-sm-6 col-xs-6 ">
+                                <div id="wrap-product" class="thumbnail add-border-left" style="border-left: 1px solid #ececec;">
+
+                                    <a href="/sach/@item.ProductCategory.Alias/@item.Alias-@(item.ID).html" title="@item.Name">
+                                        <img class="img-responsive pic-product hvr-grow" src="@item.Image" alt="@item.Name">
+                                    </a>
+                                    <a href="/sach/@item.ProductCategory.Alias/@item.Alias-@(item.ID).html" title="@item.Name">
+                                        <h5 class="product-name hvr-pulse-shrink">@item.Name</h5>
+                                    </a>
+                                    @if (item.PromotionPrice.HasValue)
+                                    {
+                                        <h4 class="product-price">@item.PromotionPrice.Value.ToString("N0")₫</h4>
+                                        <h5 class="product-price-root">@item.Price.ToString("N0")₫</h5>
+                                    }
+                                    else
+                                    {
+                                        <h4 class="product-price">@item.Price.ToString("N0")₫</h4>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        <!-- End .product -->
+                    </div>
+                    <div class="tab-pane" id="sanpham_moi">
+                        @foreach (var item in Model.ProductNew)
+                        {
+                            <div class="product col-md-5ths col-sm-6 col-xs-6 ">
+                                <div id="wrap-product" class="thumbnail add-border-left" style="border-left: 1px solid #ececec;">
+
+                                    <a href="/sach/@item.ProductCategory.Alias/@item.Alias-@(item.ID).html" title="@item.Name">
+                                        <img class="img-responsive pic-product hvr-grow" src="@item.Image" alt="@item.Name">
+                                    </a>
+                                    <a href="/sach/@item.ProductCategory.Alias/@item.Alias-@(item.ID).html" title="@item.Name">
+                                        <h5 class="product-name hvr-pulse-shrink">@item.Name</h5>
+                                    </a>
+                                    @if (item.PromotionPrice.HasValue)
+                                    {
+                                        <h4 class="product-price">@item.PromotionPrice.Value.ToString("N0")₫</h4>
+                                        <h5 class="product-price-root">@item.Price.ToString("N0")₫</h5>
+                                    }
+                                    else
+                                    {
+                                        <h4 class="product-price">@item.Price.ToString("N0")₫</h4>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="tab-pane" id="sanpham_khuyenmai">
+                        @foreach (var item in Model.ProductOnsale)
+                        {
+                            <div class="product col-md-5ths col-sm-6 col-xs-6 ">
+                                <div id="wrap-product" class="thumbnail add-border-left" style="border-left: 1px solid #ececec;">
+
+                                    <a href="/sach/@item.ProductCategory.Alias/@item.Alias-@(item.ID).html" title="@item.Name">
+                                        <img class="img-responsive pic-product hvr-grow" src="@item.Image" alt="@item.Name">
+                                    </a>
+                                    <a href="/sach/@item.ProductCategory.Alias/@item.Alias-@(item.ID).html" title="@item.Name">
+                                        <h5 class="product-name hvr-pulse-shrink">@item.Name</h5>
+                                    </a>
+                                    @if (item.PromotionPrice.HasValue)
+                                    {
+                                        <h4 class="product-price">@item.PromotionPrice.Value.ToString("N0")₫</h4>
+                                        <h5 class="product-price-root">@item.Price.ToString("N0")₫</h5>
+                                    }
+                                    else
+                                    {
+                                        <h4 class="product-price">@item.Price.ToString("N0")₫</h4>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div><!-- End .col-md-9 -->
+            <div id="section-1-quangcao" class="col-md-3">
+                <a href="@Model.QuangCao1.Url">
+                    <img class="img-responsive" src="@Model.QuangCao1.Image" alt="@Model.QuangCao1.Name">
+                </a>
+            </div><!-- End .col-md-3 -->
+        </div>
+    </div>
+    <script>
+        $('.tab-content > div').eq(0).addClass('active');
+        $(window).resize();
+    </script>
+    <div class="section-2 clearfix">
+        <div class="row">
+            <div class="col-md-2 col-sm-12 col-xs-12 pull-left section-2-floor">
+                <div class="floor">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><a href="collections/sach-tieng-viet.html" title="Sách tiếng Việt"><strong>Danh mục</strong></a></h4>
+                        </div>
+                        <div class="panel-body panel-bd panel-body-dientu">
+                            <ul>
+                                @foreach (var item in Model.Category)
+                                {
+                                    <li>
+                                        <i class="glyphicon glyphicon-menu-right hvr-buzz"></i>
+                                        <a href="/sach/@(item.Alias).html" title="@item.Name">@item.Name</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- End .floor -->
+            </div><!-- End .col-md-2 -->
+            <div class="col-md-8 dientu">
+                @foreach (var item in Model.GetAllHome)
+            {
+                    <div class="product-1 col-md-3 col-sm-6 col-xs-6">
+                        <div id="wrap-product" class="thumbnail add-border-left add-border-top">
+                            <a href="/sach/@item.ProductCategory.Alias/@item.Alias-@(item.ID).html" title="@item.Name">
+                                <img class="img-responsive pic-product hvr-grow" src="@item.Image" alt="@item.Name">
+                            </a>
+                            <a href="/sach/@item.ProductCategory.Alias/@item.Alias-@(item.ID).html" title="@item.Name">
+                                <h5 class="product-name hvr-pulse-shrink">@item.Name</h5>
+                            </a>
+                            @if (item.PromotionPrice.HasValue)
+                            {
+                                <h4 class="product-price">@item.PromotionPrice.Value.ToString("N0")₫</h4>
+                                <h5 class="product-price-root">@item.Price.ToString("N0")₫</h5>
+                            }
+                            else
+                            {
+                                <h4 class="product-price">@item.Price.ToString("N0")₫</h4>
+                            }
+                        </div>
+                    </div>
+                }
+            </div><!-- End .col-md-8 -->
+            <div class="col-md-2 pull-right section-2-quangcao">
+                <a href="@Model.QuangCao2.Url" title="">
+                    <img src="@Model.QuangCao2.Image" alt="@Model.QuangCao2.Name">
+                </a>
+            </div><!-- End .col-md-3 -->
+        </div><!-- End .row -->
+    </div><!-- End .section-2 -->
+</section>

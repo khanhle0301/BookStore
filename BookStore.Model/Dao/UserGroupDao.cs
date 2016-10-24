@@ -1,0 +1,76 @@
+﻿using BookStore.Model.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace BookStore.Model.Dao
+{
+    public class UserGroupDao
+    {
+        private BookStoreDbContext db = null;
+
+        public UserGroupDao()
+        {
+            db = new BookStoreDbContext();
+        }
+
+        public IEnumerable<Role> ListAllRole()
+        {
+            return db.Roles;
+        }
+
+        public IEnumerable<Credential> GetCredentialByUserGroupID(int id)
+        {
+            return db.Credentials.Where(x => x.UserGroupID == id);
+        }
+
+        public IEnumerable<UserGroup> GetAll()
+        {
+            return db.UserGroups;
+        }
+
+        public IEnumerable<UserGroup> ListAll()
+        {
+            return db.UserGroups;
+        }
+
+        public UserGroup ViewDetail(int id)
+        {
+            return db.UserGroups.Find(id);
+        }
+
+        public int Insert(UserGroup entity)
+        {
+            if (db.UserGroups.Any(x => x.Name == entity.Name))
+                return 0;
+            db.UserGroups.Add(entity);
+            db.SaveChanges();
+            return entity.ID;
+        }
+
+        public int Update(UserGroup entity)
+        {
+            if (db.UserGroups.Any(x => x.Name == entity.Name && x.ID != entity.ID))
+                return 0;
+            var UserGroup = db.UserGroups.Find(entity.ID);
+            UserGroup.Name = entity.Name;
+            db.SaveChanges();
+            return entity.ID;
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                var UserGroup = db.UserGroups.Find(id);
+                db.UserGroups.Remove(UserGroup);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+    }
+}

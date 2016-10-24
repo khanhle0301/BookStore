@@ -1,0 +1,46 @@
+﻿@model IEnumerable<BookStore.Model.Models.ProductCategory>
+<li>
+    <a href="/" class="current" title="Trang chủ">
+        Trang chủ
+    </a>
+</li>
+<li class="dropdown">
+    <a href="/sach/all.html" title="Danh mục sách" class="">
+        <span>Danh mục</span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="/sach/@(item.Alias).html" title="@item.Name">@item.Name</a>
+            </li>
+        }
+    </ul>
+</li>
+<li>
+    <a href="/sach/ban-chay.html" class="" title="Sách bán chạy">
+        Sách bán chạy
+    </a>
+</li>
+<li>
+    <a href="/sach/news.html" class="" title="Sách mới phát hành">
+        Sách mới phát hành
+    </a>
+</li>
+<li>
+    <a href="/blogs/news.html" class="" title="Blog">
+        Blog
+    </a>
+</li>
+<li>
+    <a href="/pages/gioi-thieu.html" class="" title="Giới thiệu">
+        Giới thiệu
+    </a>
+</li>
+<li>
+    <a href="/pages/lien-he.html" class="" title="Liên hệ">
+        Liên hệ
+    </a>
+</li>
+
+

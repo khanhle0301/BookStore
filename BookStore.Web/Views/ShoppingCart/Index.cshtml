@@ -1,0 +1,109 @@
+﻿@model List<BookStore.Web.Models.ShoppingCartViewModel>
+@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section footerJS{
+    <script src="~/Assets/client/js/shoppingCart.js"></script>
+}
+
+@{ decimal thanhtien = 0;}
+@foreach (var item in Model)
+{
+    if (item.Product.PromotionPrice.HasValue)
+    {
+        var tongtien = (@item.Product.PromotionPrice.GetValueOrDefault(0) * @item.Quantity);
+        thanhtien += tongtien;
+    }
+    else
+    {
+        var tongtien = (@item.Product.Price * @item.Quantity);
+        thanhtien += tongtien;
+    }
+}
+
+<div class="container">
+    <div id="cart">
+        <div class="row">
+            @if (Model.Count > 0)
+            {
+                <div class="col-sm-12 col-md-12">
+                    <div class="page-header">
+                        <h1>Giỏ hàng của bạn</h1>
+                    </div>
+                    <form action="/cart" method="post" id="cartform">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th class="text-center">Giá</th>
+                                    <th class="text-center">Tổng Cộng</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="col-sm-6 col-md-6">
+                                            <div class="media">
+                                                <ul>
+                                                    <li style="display: table-cell;"><img src="@item.Product.Image" alt="@item.Product.Name"></li>
+                                                    <li style="display: table-cell;"><p>@item.Product.Name</p></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td class="col-sm-1 col-md-1 text-center" style="text-align: center;vertical-align: middle;">
+                                            <input type="number" name="updates[]" id="updates_1003387605" min="1" max="1000" data-id="@item.Product.ID" value="@item.Quantity" class="txtQuantity tc item-quantity form-control input-number" style="padding: 6px 0px 6px 6px;">
+                                        </td>
+                                        @if (item.Product.PromotionPrice.HasValue)
+                                        {
+                                            <td class="col-sm-1 col-md-2 text-center" style="text-align: center;vertical-align: middle;"><strong>@item.Product.PromotionPrice.GetValueOrDefault(0).ToString("N0")₫</strong></td>
+                                            <td class="col-sm-1 col-md-2 text-center" style="text-align: center;vertical-align: middle;"><strong>@((item.Product.PromotionPrice.GetValueOrDefault(0) * item.Quantity).ToString("N0"))₫</strong></td>
+                                        }
+                                        else
+                                        {
+                                            <td class="col-sm-1 col-md-2 text-center" style="text-align: center;vertical-align: middle;"><strong>@item.Product.Price.ToString("N0")₫</strong></td>
+                                            <td class="col-sm-1 col-md-2 text-center" style="text-align: center;vertical-align: middle;"><strong>@((item.Product.Price * item.Quantity).ToString("N0"))₫</strong></td>
+                                        }
+                                        <td class="col-sm-1 col-md-1" style="text-align: center;vertical-align: middle;">
+                                            <a href="#" class="cart btn btn-danger btnDeleteItem" data-id="@item.Product.ID"><i class="fa fa-trash-o fa-lg"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td> &nbsp; </td>
+                                    <td> &nbsp; </td>
+                                    <td> &nbsp; </td>
+                                    <td><h3>Tổng đơn hàng</h3></td>
+                                    <td class="text-right"><h3><strong>@thanhtien.ToString("N0")₫</strong></h3></td>
+                                </tr>
+                                <tr>
+                                    <td> &nbsp; </td>
+                                    <td> &nbsp; </td>
+                                    <td> &nbsp; </td>
+                                    <td>
+                                        <input type="submit" id="btnUpdate" class="btn btn-info btn-lg" name="update" value="Cập nhật">
+                                    </td>
+                                    <td>
+                                        <input type="submit" id="checkout" class="btn btn-success btn-lg" name="checkout" value="Thanh toán">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-12 expanded-message text-center">
+                    <br>
+                    <br>
+                    <h2 class="tc hvr-icon-shrink" style="font-size: 20px;">Không có sản phẩm nào trong giỏ hàng!</h2>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+﻿@model BookStore.Model.Models.Post
+@{
+    ViewBag.Title = Model.Name;
+    ViewBag.Keywords = Model.MetaKeyword;
+    ViewBag.Descriptions = Model.MetaDescription;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var url = Request.Url.ToString();
+}
+<div class="container">
+    <div id="article" class="row">
+        <div class="col-md-9 col-sm-12 col-xs-12 article">
+            <!-- Begin article -->
+            <div class="article-body clearfix">
+                <h1>
+                    @Model.Name <span class="date" style="display: block;">
+                        Ngày đăng: @Model.UpdatedDate.Value.ToString("d") - Người đăng: @Model.UpdatedBy
+                    </span>
+                </h1>
+                <div class="addthis_toolbox addthis_default_style ">
+                    <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="300"></div>
+                    <div class="fb-like" data-href="@url" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+                </div>
+                <div id="article-content" style="margin-top:25px">
+                    @Html.Raw(Model.Content)
+                </div>
+            </div>
+            <hr class="divider" />
+            <div class="comment-box">
+                <h2 class="comment-title">Để lại bình luận</h2>
+                <div class="fb-comments" data-href="@url" data-width="600" data-numposts="5" data-colorscheme="light"></div>
+            </div>
+        </div>
+        <!-- Begin sidebar -->
+        <div class="col-md-3 col-sm-12 col-xs-12 sidebar">
+            <div class="kq_xh_ltd">
+                <div class="kqltd_tieude">
+                    <span class="kq_MC_LV">
+                        Bài viết mới nhất
+                    </span>
+                </div>
+                <div class="artice-content mancity_livepool" style="padding-top:0px;">
+                    @{ Html.RenderAction("News", "Post");}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

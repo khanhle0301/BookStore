@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BookStore.Model.Models.Product>
+@foreach (var item in Model)
+{
+    <div class="item-product clearfix">
+        <div class="item-img">
+            <a class="product-image" href="/sach/@item.ProductCategory.Alias/@item.Alias-@(item.ID).html">
+                <span class="img-main">
+                    <img class="replace-2x" src="@item.Image" alt="@item.Name">
+                </span>
+            </a>
+        </div>
+        <div class="item-des">
+            <div class="info-inner">
+                <div class="item-title-product">
+                    <a class="product-name" href="/sach/@item.ProductCategory.Alias/@item.Alias-@(item.ID).html">@item.Name </a>
+                </div>
+                <div class="item-price">
+                    @if (item.PromotionPrice.HasValue)
+                    {
+                        <span itemprop="price" class="price product-price">@item.PromotionPrice.Value.ToString("N0")₫</span>
+                        <span class="old-price ">@item.Price.ToString("N0")₫</span>
+                    }
+                    else
+                    {
+                        <h4 class="product-price">@item.Price.ToString("N0")₫</h4>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<BookStore.Model.Models.Post>
+
+@foreach (var item in Model)
+{
+    <div class="article-side clearfix">
+        <div class="col-md-4 col-sm-4 col-xs-4">
+            <a href="/blogs/news/@item.Alias-@(item.ID).html"><img src="@item.Image" alt="@item.Name" /></a>
+        </div>
+
+        <div class="post-content  col-md-8  col-xs-8 ">
+            <a href="/blogs/news/@item.Alias-@(item.ID).html">@item.Name</a><br>
+            <span class="date"> <i class="fa fa-calendar-o"></i>@item.UpdatedDate.Value.ToString("d")</span>
+        </div>
+    </div>
+}
+

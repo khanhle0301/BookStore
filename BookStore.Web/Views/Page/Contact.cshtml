@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Liên hệ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section footerJS{
+    <script src="~/Assets/client/js/contact.js"></script>
+}
+<div class="container" id="contact_form">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form accept-charset="UTF-8" action="/lien-he.html" id="frmContact" class="contact-form" method="post">
+                            <h1>Liên hệ</h1>
+                            <div class="content">
+                                <div class="intro"></div>
+                                <div id="section0">
+                                    <div class="field">
+                                        <div class="edit-options">
+                                            <div class="edit"></div><div class="delete"></div>
+                                        </div>
+                                        <input type="text" id="name_contact" name="name" placeholder="Tên" required="" autofocus="">
+                                    </div>
+                                    <div class="field">
+                                        <input type="email" id="email_contact" name="email" placeholder="Email" required="" autofocus="">
+                                    </div>
+                                    <div class="field">
+                                        <input type="tel" id="telephone_contact" name="phone" placeholder="Điện thoại" autofocus="">
+                                    </div>
+                                    <div class="field">
+                                        <textarea id="message_contact" name="message" placeholder="Nội dung" wrap="hard" required="" autofocus=""></textarea>
+                                    </div>
+                                    <div class="field">
+                                        <input type="submit" id="send_contact" name="send_contact">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <p style="margin-bottom:40px;font-size: 20px;color: #607a75;font-weight: 700;">Bạn có thể tìm thấy chúng tôi trên google map</p> <br>
+            <div class="row">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.0716495324477!2d106.6643567!3d10.8058244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175293b348d418f%3A0xb2721aa1e92549db!2zMTY1IFRy4bqnbiBRdeG7kWMgSG_DoG4sIFBoxrDhu51uZyA0LCBUw6JuIELDrG5oLCBI4buTIENow60gTWluaCwgVmlldG5hbQ!5e0!3m2!1sen!2s!4v1430897039461" width="450" height="500" frameborder="0" style="border:0"></iframe>
+            </div>
+        </div>
+    </div>
+</div>

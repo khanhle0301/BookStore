@@ -1,0 +1,199 @@
+﻿@model BookStore.Model.Models.Product
+@{
+    ViewBag.Title = Model.Name;
+    ViewBag.Keywords = Model.MetaKeyword;
+    ViewBag.Descriptions = Model.MetaDescription;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var url = Request.Url.ToString();
+}
+
+@section footerJS{
+    <script src="~/Assets/client/js/addtocart.js"></script>
+}
+
+@section title{
+    <section id="breadcumb" style="border-bottom: 1px solid #e1e1e1">
+        <div class="container">
+            <div class="container">
+                <div class="row">
+                    <ol class="breadcrumb breadcrumb-arrow" style="padding-left: 0;">
+                        <li><a href="/sach/all.html" target="_self">Danh mục</a></li>
+                        <li><a href="/sach/@(ViewBag.Category.Alias).html" target="_self">@ViewBag.Category.Name</a></li>
+                        <li class="active"><span> @Model.Name</span></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<script>
+    $(document).ready(function () {
+        $("#content-slider").lightSlider({
+            loop: true,
+            keyPress: true
+        });
+
+    });
+</script>
+<style>
+    .hides {
+        opacity: 0;
+        height: 0;
+    }
+</style>
+<section id="productpage">
+    <div class="container">
+        <div class="col-md-5 padding-l padding-r">
+            <div class="slice">
+                <div class="item">
+                    <div id="htc" class="clearfix" style="max-width:437px;">
+                        <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+                            @{
+                                var moreImages = (List<string>)ViewBag.MoreImages;
+                                if (moreImages.Count > 0)
+                                {
+                                    foreach (var image in moreImages)
+                                    {
+                                        <li class="data" data-thumb="@image">
+                                            <a><img src="@image" /></a>
+                                        </li>
+                                    }
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 padding-l" style="">
+            <div class="bentrai">
+                <p class="title">@Model.Name</p>
+                <p class="info">
+                    Sản xuất bởi: @ViewBag.Provider.Name &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Tình trạng:
+                    @if (Model.Quantity > 0)
+                    {
+                        <span>còn hàng</span>
+                    }
+                    else
+                    {
+                        <span>hết hàng</span>
+                    }
+                </p>
+                <p>
+                    <div class="addthis_toolbox addthis_default_style ">
+                        <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="300"></div>
+                        <div class="fb-like" data-href="@url" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+                    </div>
+                </p>
+                <div class="line"></div>
+                <p class="giathitruong" style="background: url(/Assets/client/hstatic.net/939/1000035939/1000056344/trontroncc31.jpg?v=801) 0 70% no-repeat !important;">
+                    <span class="price_tt">Giá bán:</span>
+                    @if (Model.PromotionPrice.HasValue)
+                    {
+                        <span class="fontstyle" style="margin-left: 51px;">@Model.PromotionPrice.Value.ToString("N0")₫</span>
+                    }
+                    else
+                    {
+                        <span class="fontstyle" style="margin-left: 51px;">@Model.Price.ToString("N0")₫</span>
+                    }
+                </p>
+                <form id="add-item-form" action="#" method="post" class="variants clearfix">
+                    <p class="giathitruong">Số lượng: @Model.Quantity</p>
+                    <p class=datmuahang>
+                        <span class="soluong">
+                            <img class="tru hvr-grow" src="/Assets/client/hstatic.net/939/1000035939/1000056344/trudhcc31.jpg?v=801" alt="" />
+                            <input class="inputdathang" readonly id="quantity" type="text" name="quantity" value=1 class="tc item-quantity" />
+                            <img class="cong hvr-grow" src="/Assets/client/hstatic.net/939/1000035939/1000056344/congdhcc31.jpg?v=801" alt="" />
+                        </span>
+                        <button class="btn btnAddToCart" data-id="@Model.ID" id="buy-now" class="btn-detail btn-color-buy btn-min-width btn-mgt" style="border-radius">
+                            <img style="margin-right:20px" src="/Assets/client/hstatic.net/939/1000035939/1000056344/giohangcc31.jpg?v=801" alt="">THÊM VÀO GIỎ
+                        </button>
+                    </p>
+                </form>
+                <hr />
+            </div>
+        </div>
+    </div>
+</section>
+<section id="product-tab">
+    <div class="container">
+        <div class="row">
+            <div role="tabpanel" class="product-comment">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist" id="page-product">
+                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Thông tin sản phẩm</a></li>
+                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Bình luận</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="home">
+                        <p>@Html.Raw(Model.Content)</p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane active" id="profile">
+                        <div class="fb-comments" data-href="@url" data-width="100%" data-num-posts="10"> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="product-spvuaxem">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"><h3 class="sanphamvx" style="margin-left: 0;margin-right: 0;">Sản Phẩm Liên Quan</h3></div>
+            <div class="col-md-9"><div class="linensx"></div></div>
+        </div>
+        <div class="row" style="margin-left: 15px;margin-right: 15px;">
+            @{
+                var relatedProducts = (IEnumerable<BookStore.Model.Models.Product>)ViewBag.RelatedProducts;
+            }
+            <div class="row products">
+                @foreach (var item in relatedProducts)
+                {
+                    <div class="product col-md-2 col-sm-6 col-xs-6 " style="">
+                        <div id="wrap-product" class="thumbnail " style="border: 1px solid #ececec;margin-right: 23px;">
+                            <a href="/sach/@item.ProductCategory.Alias/@item.Alias-@(item.ID).html" title="@item.Name">
+                                <img class="img-responsive pic-product hvr-grow" src="@item.Image" alt="@item.Name">
+                            </a>
+                            <a href="/sach/@item.ProductCategory.Alias/@item.Alias-@(item.ID).html" title="@item.Name">
+                                <h5 class="product-name hvr-sink">@item.Name</h5>
+                            </a>
+                            @if (item.PromotionPrice.HasValue)
+                            {
+                                <h4 class="product-price">@item.PromotionPrice.Value.ToString("N0")₫</h4>
+                                <h5 class="product-price-root">@item.Price.ToString("N0")₫</h5>
+                            }
+                            else
+                            {
+                                <h4 class="product-price">@item.Price.ToString("N0")₫</h4>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $('.product-comment #profile').addClass('hides');
+    $('.product-comment #page-product > li').eq(0).addClass('active');
+    $('.product-comment .tab-content > div').eq(0).addClass('active');
+    $(document).ready(function () {
+        $('#page-product > li > a').click(function () {
+            $('.product-comment #profile').removeClass('hides');
+
+            $('#page-product > li').removeClass('active');
+            $(this).parent('li').addClass('active');
+            var index = $(this).parent('li').index();
+            $('.tab-content > div').removeClass('active');
+            $('.tab-content > div').eq(index).addClass('active');
+            setTimeout(function () {
+                $(window).resize();
+            }, 1000);
+
+        })
+    });
+
+</script>

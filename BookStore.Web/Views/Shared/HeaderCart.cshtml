@@ -1,0 +1,9 @@
+﻿@model List<BookStore.Web.Models.ShoppingCartViewModel>
+@{ int soluong = 0;}
+@foreach (var item in Model)
+{
+    soluong += item.Quantity;
+}
+
+<a href="/gio-hang.html"><img src="/Assets/client/hstatic.net/939/1000035939/1000056344/ico-giohangcc31.png?v=801" alt="">Giỏ hàng (@soluong sản phẩm)</a>
+

@@ -1,0 +1,132 @@
+﻿@model BookStore.Web.Infrastructure.Core.PaginationSet<BookStore.Model.Models.Product>
+@{
+    ViewBag.Title = "Tìm kiếm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @if (@ViewBag.Keyword == "")
+    {
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-xs-12 col-sm-12 search-input">
+                <div id="search">                  
+                    <a class="search-submit-button hvr-grow" href="#" onclick="document.forms['search-q'].submit(); return false;">
+                        <img src="//hstatic.net/939/1000035939/1000056344/search-ico.png?v=801">
+                    </a>
+                    <form id="searchtext" method="get" action="/tim-kiem.html" name="search-q">
+                        <input id="txtKeyword" type="text" name="keyword" placeholder="Bạn cần tìm gì...">
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        if (Model.Count > 0)
+        {
+            <div class="row">
+                <div id="search">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 style="padding: 10px;"><i class="fa fa-search"></i> Kết quả tìm kiếm cho <strong>"@ViewBag.Keyword"</strong> </h1>
+                        </div>
+                    </div>
+                    <div class="clearfix results" style="border-top:1px solid #ececec;border-left:1px solid #ececec;">
+                        @foreach (var item in Model.Items)
+                    {
+                            <div class="product-1 col-md-5ths col-sm-6 col-xs-6">
+                                <div id="wrap-product" class="thumbnail add-border-left add-border-top">
+                                    <a href="/sach/@item.ProductCategory.Alias/@item.Alias-@(item.ID).html" title="@item.Name">
+                                        <img class="img-responsive pic-product hvr-grow" src="@item.Image" alt="@item.Name">
+                                    </a>
+                                    <a href="/sach/@item.ProductCategory.Alias/@item.Alias-@(item.ID).html" title="@item.Name">
+                                        <h5 class="product-name hvr-sink">@item.Name</h5>
+                                    </a>
+                                    @if (item.PromotionPrice.HasValue)
+                                    {
+                                        <h4 class="product-price">@item.PromotionPrice.Value.ToString("N0")₫</h4>
+                                        <h5 class="product-price-root">@item.Price.ToString("N0")₫</h5>
+                                    }
+                                    else
+                                    {
+                                        <h4 class="product-price">@item.Price.ToString("N0")₫</h4>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="row">
+                        <div>
+                            @if (Model.TotalPages > 1)
+                            {
+                                // Create numeric links
+                                var startPageIndex = Math.Max(1, Model.Page - Model.MaxPage / 2);
+                                var endPageIndex = Math.Min(Model.TotalPages, Model.Page + Model.MaxPage / 2);
+                                <nav>
+                                    <ul class="pagination clearfix pagination-color">
+                                        @if (Model.Page > 1)
+                                        {
+                                            <li>
+                                                <a href="?keyword=@ViewBag.Keyword&page=1" aria-label="First">
+                                                    <i class="fa fa-angle-double-left"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="?keyword=@ViewBag.Keyword&page=@(Model.Page-1)" aria-label="Previous">
+                                                    <i class="fa fa-angle-left"></i>
+                                                </a>
+                                            </li>
+                                        }
+
+                                        @for (int i = startPageIndex; i <= endPageIndex; i++)
+                                        {
+                                            if (Model.Page == i)
+                                            {
+                                                <li class="active"><a href="?keyword=@ViewBag.Keyword&page=@i" title="Trang @i">@i</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a href="?keyword=@ViewBag.Keyword&page=@i" title="Trang @i">@i</a></li>
+                                            }
+                                        }
+                                        @if (Model.Page < Model.TotalPages)
+                                        {
+                                            <li>
+                                                <a href="?keyword=@ViewBag.Keyword&page=@(Model.Page+1)" aria-label="Next">
+                                                    <i class="fa fa-angle-right"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="?keyword=@ViewBag.Keyword&page=@Model.TotalPages" aria-label="Last">
+                                                    <i class="fa fa-angle-double-right"></i>
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </nav>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- /#search -->
+            </div>
+        }
+
+        else
+        {
+            <div class="row">
+                <div id="search">
+                    <div class="row">
+                        <div class="col-md-12 expanded-message">
+                            <h2>Không tìm thấy nội dung bạn yêu cầu</h2>
+                            <span class="subtext">
+                                Không tìm thấy  <strong>"@ViewBag.Keyword"</strong> . Vui lòng tìm kiếm với từ khóa khác.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- /#search -->
+            </div>
+        }
+    }
+</div>

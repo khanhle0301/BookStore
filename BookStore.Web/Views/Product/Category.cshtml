@@ -1,0 +1,7 @@
+﻿@model IEnumerable<BookStore.Model.Models.ProductCategory>
+@foreach (var item in Model)
+{
+    <li>
+        <a href="/sach/@(item.Alias).html" title="@item.Name">@item.Name</a>
+    </li>
+}
