@@ -10,7 +10,8 @@
     Cập nhật sản phẩm
 }
 @section jsFooter{
-    <script src="~/Assets/admin/js/controller/editProductController.js"></script>
+
+    <script src="~/Assets/admin/js/controller/productEditController.js"></script>
     <script>
         $('#btnSelectImage').on('click', function (e) {
             e.preventDefault();
@@ -35,7 +36,7 @@
         });
     </script>
 }
-
+<input type="hidden" id="hidProductID" value="@Model.ID" />
 <input type="hidden" id="color" value="@ViewBag.ProductColor" />
 <div class="row">
     <div class="col-lg-12">
@@ -75,7 +76,16 @@
                                 <a id="btnSelectImage" href="#">Chọn ảnh</a>
                                 @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
                             </div>
-
+                            <div class="form-group">
+                                <label>Thêm ảnh</label>
+                                <div class="modal-body" style="height:90px">
+                                    <div id="imageList" style="margin:5px;">
+                                    </div>
+                                    <div class="clear"></div>
+                                    <input type="button" id="btnChooImages" class="btn btn-primary" value="Chọn ảnh" />
+                                    @Html.TextBoxFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" }, id = "txtmoreImage", Type = "hidden" })
+                                </div>
+                            </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Price)
                                 @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "1" } })
@@ -120,8 +130,8 @@
                                 @Html.LabelFor(model => model.HomeFlag)
                                 @Html.DropDownListFor(model => model.HomeFlag, new List<SelectListItem>()
                                     {
-                                        new SelectListItem(){Selected=true,Text="Kích hoạt",Value="true"},
-                                        new SelectListItem(){Selected=true,Text="Khóa",Value="false"},
+                                        new SelectListItem() { Selected = true,Text = "Kích hoạt",Value = "true"},
+                                        new SelectListItem() { Selected = true,Text = "Khóa",Value = "false"},
                                     }, new { @class = "form-control" })
                             </div>
 
@@ -129,16 +139,16 @@
                                 @Html.LabelFor(model => model.HotFlag)
                                 @Html.DropDownListFor(model => model.HotFlag, new List<SelectListItem>()
                                     {
-                                        new SelectListItem(){Selected=true,Text="Kích hoạt",Value="true"},
-                                        new SelectListItem(){Selected=true,Text="Khóa",Value="false"},
+                                        new SelectListItem() { Selected = true,Text = "Kích hoạt",Value = "true"},
+                                        new SelectListItem() { Selected = true,Text = "Khóa",Value = "false"},
                                     }, new { @class = "form-control" })
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.SaleFlag)
                                 @Html.DropDownListFor(model => model.SaleFlag, new List<SelectListItem>()
                                     {
-                                        new SelectListItem(){Selected=true,Text="Kích hoạt",Value="true"},
-                                        new SelectListItem(){Selected=true,Text="Khóa",Value="false"},
+                                        new SelectListItem() { Selected = true,Text = "Kích hoạt",Value = "true"},
+                                        new SelectListItem() { Selected = true,Text = "Khóa",Value = "false"},
                                     }, new { @class = "form-control" })
                             </div>
 
@@ -146,8 +156,8 @@
                                 @Html.LabelFor(model => model.Status)
                                 @Html.DropDownListFor(model => model.Status, new List<SelectListItem>()
                                     {
-                                        new SelectListItem(){Selected=true,Text="Kích hoạt",Value="true"},
-                                        new SelectListItem(){Selected=true,Text="Khóa",Value="false"},
+                                        new SelectListItem() { Selected = true,Text = "Kích hoạt",Value = "true"},
+                                        new SelectListItem() { Selected = true,Text = "Khóa",Value = "false"},
                                     }, new { @class = "form-control", @id = "txt" })
                             </div>
 

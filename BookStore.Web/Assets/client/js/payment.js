@@ -78,8 +78,14 @@
             success: function (response) {
 
                 if (response.status) {
-                    alert('Gởi đơn hàng thành công. Chúng tôi sẽ liên hệ sớm nhất.');
-                    window.location.href = "/";
+                    if (response.urlCheckout != undefined && response.urlCheckout != '') {
+                        window.location.href = response.urlCheckout;
+                    }
+                    else {
+                        alert('Gởi đơn hàng thành công. Chúng tôi sẽ liên hệ sớm nhất.');
+                        window.location.href = "/";
+                    }
+
                 }
                 else {
                     alert('Có lỗi xảy ra.');

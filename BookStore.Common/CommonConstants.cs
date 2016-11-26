@@ -12,6 +12,7 @@
         public const int DefaultFooterId = 1;
         public const int DefaultContactDetailId = 1;
         public static string MEMBER_GROUP = "MOD";
-        public static int ADMIN_GROUP = 1;
+        public static int ADMIN_GROUP = 1;      
+        public const string SessionOrder = "SessionOrder";
     }
 }

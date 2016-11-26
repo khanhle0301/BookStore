@@ -7,7 +7,15 @@ namespace BookStore.Web
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");          
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+
+            routes.MapRoute(
+           name: "CancelOrder",
+           url: "thanh-toan-that-bai.html",
+           defaults: new { controller = "ShoppingCart", action = "CancelOrder", alias = UrlParameter.Optional },
+           namespaces: new string[] { "BookStore.Web.Controllers" }
+           );
 
             routes.MapRoute(
            name: "Checkout",

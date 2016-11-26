@@ -346,6 +346,7 @@ namespace BookStore.Model.Dao
                 model.HotFlag = product.HotFlag;
                 model.SaleFlag = product.SaleFlag;
                 model.Status = product.Status;
+                model.MoreImages = product.MoreImages;
                 db.SaveChanges();
                 return true;
             }

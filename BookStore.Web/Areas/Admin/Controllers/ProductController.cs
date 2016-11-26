@@ -48,7 +48,7 @@ namespace BookStore.Web.Areas.Admin.Controllers
                     model.Alias = StringHelper.ToUnsignString(model.Name);
                     model.CreatedDate = DateTime.Now;
                     model.UpdatedDate = DateTime.Now;
-                    model.MoreImages = "[]";
+                    //model.MoreImages = "[]";
                     var session = (AdminLogin)Session[CommonConstants.ADMIN_SESSION];
                     var entity = new UserDao().GetByID(session.UserName);
                     model.CreatedBy = entity.Name;
@@ -78,6 +78,8 @@ namespace BookStore.Web.Areas.Admin.Controllers
             var result = Mapper.Map<Product, ProductViewModel>(_productDao.GetById(id));
             SetViewBag(result.CategoryID);
             SetViewBagProvider(result.ProviderID);
+            List<string> listImages = new JavaScriptSerializer().Deserialize<List<string>>(result.MoreImages);
+            ViewBag.MoreImages = listImages;
             return View(result);
         }
 
@@ -99,7 +101,7 @@ namespace BookStore.Web.Areas.Admin.Controllers
                         var session = (AdminLogin)Session[CommonConstants.ADMIN_SESSION];
                         var entity = new UserDao().GetByID(session.UserName);
                         model.UpdatedBy = entity.Name;
-                        model.MoreImages = "[]";
+                        //model.MoreImages = "[]";
                         var product = new Product();
                         product.UpdateProduct(model);
                         var result = _productDao.Update(product);                      
